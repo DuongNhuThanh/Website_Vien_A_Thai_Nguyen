@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    margin-top: 50px;
+}
+.container .title {
+    text-align: center;
+}
+.container .title h5 {
+    padding: 12px 0;
+    opacity: 0.7;
+}
+.container .grid_container {
+    margin-top: 50px;
+    padding: 0 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+.khoa_item {
+    padding: 12px;
+    text-align: center;
+}
+.khoa_item img {
+    padding-bottom: 20px;
+    height: 100px;
+}
+.khoa_item p {
+    font-weight: 550;
+}
+.khoa_item {
+    transition: 0.3s ease;
+}
+
+.khoa_item:hover {
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+    color: #2196F3;
+    cursor: pointer;
+}

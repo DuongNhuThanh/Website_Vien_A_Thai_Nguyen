@@ -11,9 +11,10 @@ error_reporting(E_ALL & ~E_WARNING);
         $chuyenkhoa = $_POST['chuyenkhoa'];
         $bacsi = $_POST['bacsi'];
         $dichvu = $_POST['dichvu'];
+        $mota = $_POST['mota'];
 
         // echo $thoigian,$hoten,$email,$sdt,$chuyenkhoa,$bacsi,$dichvu;
-        $phieukham->themPK($maphieu,$thoigian,$hoten,$email,$sdt,$chuyenkhoa,$bacsi,$dichvu);
+        $phieukham->themPK($maphieu,$thoigian,$hoten,$email,$sdt,$chuyenkhoa,$bacsi,$dichvu,$mota);
         
     }
        

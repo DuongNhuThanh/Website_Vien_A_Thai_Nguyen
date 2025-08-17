@@ -17,8 +17,17 @@ class ChuyenkhoaController
         $kq = $this->chuyenkhoa->layDSCK();
         require_once '/xampp/htdocs/Vien_A/admin/view/chuyenkhoa/index.php';
     }
-    public function DSCKUSER(){
+
+    public function DSCKUSER(){//ds chuyên khoa hiển thị trên form đặt lịch index.php
         $kq = $this->chuyenkhoa->layDSCK();
+        return $kq;
+    }
+    public function DSCKHienThi(){//ds tên,ảnh chuyên khoa để hiển thị trên trang chuyenkhoa.php
+        $kq = $this->chuyenkhoa->layDSCKHienThi();
+        return $kq;
+    }
+    public function TenCK($machuyenkhoa){//lấy tên chuyên khoa theo mã để hiển thị form ckbs do lấy được machuyenkhoa của bs
+        $kq = $this->chuyenkhoa->layTenCK($machuyenkhoa);
         return $kq;
     }
     
@@ -27,8 +36,8 @@ class ChuyenkhoaController
         return $kq;
     }
 
-    public function themCK($machuyenkhoa, $tenchuyenkhoa){
-        $kq = $this->chuyenkhoa->themCK($machuyenkhoa, $tenchuyenkhoa);
+    public function themCK($machuyenkhoa, $tenchuyenkhoa,$anh){
+        $kq = $this->chuyenkhoa->themCK($machuyenkhoa, $tenchuyenkhoa,$anh);
         echo "Thêm thành công chuyên khoa";
     }
 

@@ -26,6 +26,10 @@ class DichvuController
         $kq = $this->dichvu->layDSDVTheoMa($madichvu);
         return $kq;
     }
+    public function DSDVTheoChuyenKhoa($machuyenkhoa){
+        $kq = $this->dichvu->layDVTheoMaCK($machuyenkhoa);
+        return $kq;
+    }
 
     public function themDV($madichvu,$tendichvu,$mota,$chiphi,$chuyenkhoa){
         $kq = $this->dichvu->themDV($madichvu,$tendichvu,$mota,$chiphi,$chuyenkhoa);

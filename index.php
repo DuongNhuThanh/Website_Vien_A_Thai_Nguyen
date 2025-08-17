@@ -36,6 +36,7 @@ if ($kqDV) {
     <title> Đặt lịch khám bệnh viện A Thái Nguyên</title>
     <link rel="stylesheet" href="./asset/main.css">
     <link rel="stylesheet" href="./asset/icon/themify-icons-font/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="./asset/javascript/main.js">
 </head>
 
 <body>
@@ -69,28 +70,19 @@ if ($kqDV) {
                 <div class="nav">
                     <li>
                         <i class="ti-home"></i>
-                        <a href="#" target="_parent">Trang chủ</a>
+                        <a href="#">Trang chủ</a>
                     </li>
                     <li>
                         <i class="ti-user"></i>
-                        <a href="./bacsi.html" target="_parent">Bác sĩ</a>
+                        <a href="#" onclick="location.replace('./customer/view/bacsi.php')">Bác sĩ</a>
                     </li>
                     <li>
                         <i class="ti-bookmark-alt"></i>
-                        <a href="" target="_parent">
-                            Chuyên khoa
-                        </a>
-                        <ul class="subnav">
-                            <li>Lâm sàn</li>
-                            <li>Nhi</li>
-                            <li>Nội tổng hợp</li>
-                            <li>Gây mê và hồi sức</li>
-                            <li>Khoa chấn thương</li>
-                        </ul>
+                        <a href="#" onclick="location.replace('./customer/view/chuyenkhoa.php')">Chuyên khoa </a>
                     </li>
                     <li>
                         <i class="ti-archive"></i>
-                        <a href="./dichvu.html" target="_parent">Dịch vụ</a>
+                        <a href="#" onclick="location.replace('./customer/view/dichvu.php')">Dịch vụ</a>
                     </li>
                     <li>
                         <i class="ti-list"></i>
@@ -100,11 +92,11 @@ if ($kqDV) {
                         <ul class="subnav">
                             <li id="login">
                                 <i class="ti-user"></i>
-                                <a href="login.php" target="_parent">Đăng nhập</a>
+                                <a href="#" onclick="location.replace('login.php')">Đăng nhập</a>
                             </li>
                             <li id="register">
                                 <i class="ti-user"></i>
-                                <a href="register.php" target="_parent">Đăng kí</a>
+                                <ahref="#" onclick="location.replace('register.php')">Đăng kí</ahref=>
                             </li>
                         </ul>
                     </li>
@@ -119,144 +111,53 @@ if ($kqDV) {
                         <img id="slide" src="./asset/img/img1.png" alt="Slide image" />
                     </div>
                 </div>
-
-                <script>
-                    const images = [
-                        "./asset/img/img1.png",
-                        "./asset/img/img2.png"
-                    ];
-                    let currentIndex = 0;
-
-                    setInterval(() => {
-                        currentIndex = (currentIndex + 1) % images.length;
-                        document.getElementById("slide").src = images[currentIndex];
-                    }, 2500);
-                </script>
             </div>
         </div>
 
         <div class="doctor-container">
             <div class="container-doc">
+                <?php foreach ($rowBS as $bs) { ?>
+                    <?php if ($bs['machuyenkhoa']) { //lấy mã chuyên khoa của từng đối tượng bác sĩ để lấy ra chuyên khoa tương ứng
+                        $maCKBS = $bs['machuyenkhoa'];
+                        $kqCKBS = $chuyenkhoa->TenCK($maCKBS);
+                        $TenCKBS = mysqli_fetch_assoc($kqCKBS);
+                    } ?>
 
-                <div class="box-doctor">
-                    <div class="img-doc">
-                        <img src="./asset/img/img_Bs_Ha.webp" alt="">
-                    </div>
-                    <div class="name-doc">
-                        <h4>BS.CK2 Nguyễn Thị Thu Hà</h4>
-                    </div>
-                    <div class="chyenkhoa-doc">
-                        <h4>Nhi Khoa</h4>
-                    </div>
-                    <div class="booking-now">
-                        <h4>Đặt lịch ngay</h4>
-                        <div class="ti-arrow-right"></div>
-                    </div>
-                </div>
-                
-                <div class="box-doctor">
-                    <div class="img-doc">
-                        <img src="./asset/img/img_BS_Huyen.webp" alt="">
-                    </div>
-                    <div class="name-doc">
-                        <h4>ThS.BS.CK2 Hoàng Thị Thu Huyền</h4>
-                    </div>
-                    <div class="chyenkhoa-doc">
-                        <h4>Sản phụ khoa - Ung bướu</h4>
-                    </div>
-                    <div class="booking-now">
-                        <h4>Đặt lịch ngay</h4>
-                        <div class="ti-arrow-right"></div>
-                    </div>
-                </div>
+                    <div class="box-doctor"
+                        data-bacsi="<?php echo htmlspecialchars($bs['tenbacsi']); ?>"
+                        data-mack="<?php echo htmlspecialchars($bs['machuyenkhoa']); ?>">
 
-                <div class="box-doctor">
-                    <div class="img-doc">
-                        <img src="./asset/img/img_Bs_Trung.webp" alt="">
-                    </div>
-                    <div class="name-doc">
-                        <h4>PGS.TS.BS Lâm Việt Trung</h4>
-                    </div>
-                    <div class="chyenkhoa-doc">
-                        <h4>Tiêu hóa - Ngoại tiết niệu</h4>
-                    </div>
-                    <div class="booking-now">
-                        <h4>Đặt lịch ngay</h4>
-                        <div class="ti-arrow-right"></div>
-                    </div>
-                </div>
+                        <div class="img-doc">
+                            <?php
+                            if (!empty($bs['avartar'])) {
+                                $image_data = base64_encode($bs['avartar']);
+                                echo '<img src="data:image/jpeg;base64,' . htmlspecialchars($image_data) . '" alt="Ảnh bác sĩ">';
+                            } else {
+                                echo '<p>Ảnh không tồn tại.</p>';
+                            }
+                            ?>
+                        </div>
 
-                <div class="box-doctor">
-                    <div class="img-doc">
-                        <img src="./asset/img/img_BS_Hieu.webp" alt="">
-                    </div>
-                    <div class="name-doc">
-                        <h4>BS.CK2 Võ Đức Hiếu</h4>
-                    </div>
-                    <div class="chyenkhoa-doc">
-                        <h4>Ung bướu</h4>
-                    </div>
-                    <div class="booking-now">
-                        <h4>Đặt lịch ngay</h4>
-                        <div class="ti-arrow-right"></div>
-                    </div>
-                </div>
+                        <div class="name-doc">
+                            <?php echo htmlspecialchars($bs['tenbacsi']); ?>
+                        </div>
 
-                <div class="box-doctor">
-                    <div class="img-doc">
-                        <img src="./asset/img/img_Bs_Thang.webp" alt="">
-                    </div>
-                    <div class="name-doc">
-                        <h4>TS.BS Nguyễn Bá Thắng</h4>
-                    </div>
-                    <div class="chyenkhoa-doc">
-                        <h4>Nội thần kinh</h4>
-                    </div>
-                    <div class="booking-now">
-                        <h4>Đặt lịch ngay</h4>
-                        <div class="ti-arrow-right"></div>
-                    </div>
-                </div>
+                        <div class="chyenkhoa-doc">
+                            <?php echo htmlspecialchars($TenCKBS['tenchuyenkhoa']); ?>
+                        </div>
 
-                <div class="box-doctor">
-                    <div class="img-doc">
-                        <img src="./asset/img/img_BS_Nam.webp" alt="">
+                        <div class="booking-now">
+                            <h4>Đặt lịch ngay</h4>
+                            <div class="ti-arrow-right"></div>
+                        </div>
                     </div>
-                    <div class="name-doc">
-                        <h4>PGS.TS.BS Trần Thanh Nam</h4>
-                    </div>
-                    <div class="chyenkhoa-doc">
-                        <h4>Nội tiết</h4>
-                    </div>
-                    <div class="booking-now">
-                        <h4>Đặt lịch ngay</h4>
-                        <div class="ti-arrow-right"></div>
-                    </div>
-                </div>
-
-                <div class="box-doctor">
-                    <div class="img-doc">
-                        <img src="./asset/img/img_Bs_Linh.webp" alt="">
-                    </div>
-                    <div class="name-doc">
-                        <h4>ThS.CK2 Huỳnh Phan Phúc Linh</h4>
-                    </div>
-                    <div class="chyenkhoa-doc">
-                        <h4>Cơ xương khớp</h4>
-                    </div>
-                    <div class="booking-now">
-                        <h4>Đặt lịch ngay</h4>
-                        <div class="ti-arrow-right"></div>
-                    </div>
-                </div>
-
+                <?php } ?>
             </div>
-            <a href="">Xem thêm</a>
+
+            <div><a href="./customer/view/bacsi.php">Xem thêm</a></div>
         </div>
-        <div>
-            
-        </div>
-        <div class="container">
+
+        <div class="container-form-infor">
             <div class="row-body">
                 <div class="col-75">
                     <div class="text-justify">
@@ -296,9 +197,12 @@ if ($kqDV) {
                             <div class="col-row-32">
                                 <div class="form-group">
                                     <label for="">Chuyên khoa</label>
-                                    <select name="chuyenkhoa" id="">
+                                    <select name="chuyenkhoa" id="chuyenkhoa">
+                                        <option value="">Chọn chuyên khoa</option>
                                         <?php foreach ($rowCK as $ck) { ?>
-                                            <option><?php echo $ck['tenchuyenkhoa']; ?></option>
+                                            <option value="<?php echo $ck['machuyenkhoa']; ?>">
+                                                <?php echo $ck['tenchuyenkhoa']; ?>
+                                            </option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -306,34 +210,120 @@ if ($kqDV) {
                             <div class="col-row-32">
                                 <div class="form-group">
                                     <label for="">Bác sĩ</label>
-                                    <select name="bacsi" id="">
-                                        <?php foreach ($rowBS as $bs) { ?>
-                                            <option><?php echo $bs['tenbacsi']; ?></option>
-                                        <?php } ?>
+                                    <select name="bacsi" id="bacsi" required>
+                                        <option value="">Chọn bác sĩ</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-row-32">
                                 <div class="form-group">
                                     <label for="">Dịch Vụ</label>
-                                    <select name="dichvu" id="">
-                                        <?php foreach ($rowDV as $dv) { ?>
-                                            <option><?php echo $dv['tendichvu']; ?></option>
-                                        <?php } ?>
+                                    <select name="dichvu" id="dichvu" required>
+                                        <option value="">Chọn dịch vụ</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+                        <div class="description">
+                            <div class="form-group">
+                                <label for="">Triệu chứng</label>
+                                <input type="text" name="mota" placeholder="Triệu chứng" required>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="form-group-center center">
-                                <button type="submit">
+                                <button type="button" onclick="showConfirm()">
                                     <i class="ti-check-box"></i>
                                     Gửi thông tin đặt lịch
                                 </button>
                             </div>
                         </div>
                     </form>
+                    <div id="infoDisplay" style="display: none;">
+                        <h3>Thông Tin Đã Đặt</h3>
+                        <div id="displayContent"></div>
+                    </div>
                 </div>
+                <div id="confirmBox" class="overlay">
+                    <div class="popup">
+                        <h3>Xác nhận thông tin đặt lịch</h3>
+                        <div id="infoPreview"></div>
+                        <button onclick="submitForm()">Xác nhận gửi</button>
+                        <button onclick="closeConfirm()">Hủy</button>
+                    </div>
+                </div>
+                <script>
+                    function showConfirm() {
+                        const form = document.getElementById('form-dk');
+                        const data = {
+                            hoten: form.hoten.value.trim(),
+                            email: form.email.value.trim(),
+                            sdt: form.sdt.value.trim(),
+                            khunggio: form.khunggio.value.trim(),
+                            chuyenkhoa: form.chuyenkhoa.selectedIndex > -1 ? form.chuyenkhoa.options[form.chuyenkhoa.selectedIndex].text : '',
+                            bacsi: form.bacsi.selectedIndex > -1 ? form.bacsi.options[form.bacsi.selectedIndex].text : '',
+                            //để -1 để loại bỏ trường hợp nhấn đặt lịch thì nhảy thông tin thẳng form thì 
+                            // 0 sự thay đổi khác -1 sự thay đổi sẽ thỏa mãn điều kiện bên dưới !data.chuyenkhoa
+                            //nhấn đặt lịch ngay sẽ lấy tự động đc chuyên khoa và bác sĩ nên sẽ là 0 lần thay đổi vậy nên mới cần đặt 2 cái về -1 để 0 lần thay đổi >-1 thỏa mãn điều kiện
+                            dichvu: form.dichvu.selectedIndex > 0 ? form.dichvu.options[form.dichvu.selectedIndex].text : '',
+                            mota: form.mota.value.trim()
+                            //trường hợp khi không nhấn đặt lịch ngay mà chọn thủ công thì khi chọn thì bắt buộc chọn chuyên khoa thì mới chọn đc bác sĩ và dịch vụ
+                            //-> khi chọn chuyên khoa thì -1+1 = 0 -1 và lúc đó bác sĩ và chuyên khoa cũng phải chọn để theo chuyên khoa thì -1 bác sĩ +1 = 0>-1 thỏa mãn 
+                            // tương tự dịch vụ
+                        };
+
+                        // Kiểm tra tất cả các trường bắt buộc
+                        if (!data.hoten || !data.email || !data.sdt || !data.khunggio || !data.chuyenkhoa || !data.bacsi || !data.dichvu || !data.mota) {
+                            alert("Vui lòng điền đầy đủ tất cả các trường trước khi xác nhận!");
+                            return;
+                        }
+
+                        const preview = `
+            <p><strong>Họ tên:</strong> ${data.hoten}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>SĐT:</strong> ${data.sdt}</p>
+            <p><strong>Khung giờ:</strong> ${data.khunggio}</p>
+            <p><strong>Chuyên khoa:</strong> ${data.chuyenkhoa}</p>
+            <p><strong>Bác sĩ:</strong> ${data.bacsi}</p>
+            <p><strong>Dịch vụ:</strong> ${data.dichvu}</p>
+            <p><strong>Triệu chứng:</strong> ${data.mota}</p>
+        `;
+                        document.getElementById('infoPreview').innerHTML = preview;
+                        document.getElementById('confirmBox').style.display = 'flex';
+                    }
+
+                    function closeConfirm() {
+                        document.getElementById('confirmBox').style.display = 'none';
+                    }
+
+                    function submitForm() {
+                        const form = document.getElementById('form-dk');
+                        const data = {
+                            hoten: form.hoten.value.trim(),
+                            email: form.email.value.trim(),
+                            sdt: form.sdt.value.trim(),
+                            khunggio: form.khunggio.value.trim(),
+                            chuyenkhoa: form.chuyenkhoa.selectedIndex > 0 ? form.chuyenkhoa.options[form.chuyenkhoa.selectedIndex].text : '',
+                            bacsi: form.bacsi.selectedIndex > 0 ? form.bacsi.options[form.bacsi.selectedIndex].text : '',
+                            dichvu: form.dichvu.selectedIndex > 0 ? form.dichvu.options[form.dichvu.selectedIndex].text : '',
+                            mota: form.mota.value.trim()
+                        };
+
+                        const display = `
+            <p><strong>Họ tên:</strong> ${data.hoten}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>SĐT:</strong> ${data.sdt}</p>
+            <p><strong>Khung giờ:</strong> ${data.khunggio}</p>
+            <p><strong>Chuyên khoa:</strong> ${data.chuyenkhoa}</p>
+            <p><strong>Bác sĩ:</strong> ${data.bacsi}</p>
+            <p><strong>Dịch vụ:</strong> ${data.dichvu}</p>
+            <p><strong>Triệu chứng:</strong> ${data.mota}</p>
+        `;
+                        document.getElementById('displayContent').innerHTML = display;
+                        document.getElementById('confirmBox').style.display = 'none';
+                        form.submit();
+                    }
+                </script>
 
                 <div class="col-25">
                     <div class="confirm box">
@@ -370,6 +360,11 @@ if ($kqDV) {
 
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="feed-back center" style="margin: 150px 0;">
+            <div>
+                <h1>Feed-back</h1>
             </div>
         </div>
         <div id="foot" class="footer">
@@ -431,6 +426,9 @@ if ($kqDV) {
             </div>
         </div>
     </div>
+    <script src="./asset/javascript/main.js"></script>
+
+
 </body>
 
 </html>

@@ -5,8 +5,9 @@
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         $machuyenkhoa = $_POST['machuyenkhoa'];
         $tenchuyenkhoa = $_POST['tenchuyenkhoa'];
+        $anh = $_FILES['anh'];
 
-        $chuyenkhoa->themCK($machuyenkhoa, $tenchuyenkhoa);
+        $chuyenkhoa->themCK($machuyenkhoa, $tenchuyenkhoa, $anh);
     }
 
 ?>
@@ -28,6 +29,10 @@
             <div class="form-group">
                 <label for="">Tên chuyên khoa</label>
                 <input type="text" class="form-control" name="tenchuyenkhoa" id="" placeholder="Nhập tên chuyên khoa" required>
+            </div>
+            <div class="form-group">
+                <label for="">Ảnh chuyên khoa</label>
+                <input type="file" class="form-control" name="anh" id="" placeholder="Chọn chuyên khoa" required>
             </div>
             <button type="submit" class="btn btn-primary">Thêm</button>
         </form>

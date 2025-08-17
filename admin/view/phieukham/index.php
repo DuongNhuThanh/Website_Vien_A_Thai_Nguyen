@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="max-width: 100%;">
         <table class="table table-dark table-striped">
             <?php if($kq): ?>
-                <tr>
+                <tr style="text-align: center;">
                     <th>Mã phiếu</th>
                     <th>Thời gian</th>
                     <th>Họ tên</th>
@@ -19,9 +19,10 @@
                     <th>Chuyên khoa</th>
                     <th>Bác sĩ</th>
                     <th>Dịch vụ</th>
+                    <th>Mô tả</th>
                 </tr>
                 <?php while($row = mysqli_fetch_assoc($kq)): ?>
-                    <tr>
+                    <tr style="text-align: center;">
                         <td><?php echo $row['maphieu']; ?></td>
                         <td><?php echo $row['thoigian']; ?></td>
                         <td><?php echo $row['hoten']; ?></td>
@@ -30,6 +31,7 @@
                         <td><?php echo $row['chuyenkhoa']; ?></td>
                         <td><?php echo $row['bacsi']; ?></td>
                         <td><?php echo $row['dichvu']; ?></td>
+                        <td><?php echo $row['mota']; ?></td>
                         <td><a href="./view/phieukham/xoa.php?maphieu=<?php echo $row['maphieu']; ?>">Xóa</a></td>
                     </tr>
                 <?php endwhile;?>

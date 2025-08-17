@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +26,7 @@
                     <td><?php echo $row['tendichvu']; ?></td>
                     <td><?php echo $row['mota']; ?></td>
                     <td><?php echo $row['chiphi']; ?></td>
-                    <td><?php echo $row['chuyenkhoa']; ?></td>
+                    <td><?php echo $row['machuyenkhoa']; ?></td>
                     <td><a href="./view/dichvu/sua.php?madichvu=<?php echo $row['madichvu']; ?>">Sửa</a></td>
                     <td><a href="./view/dichvu/xoa.php?madichvu=<?php echo $row['madichvu']; ?>">Xóa</a></td>
                 </tr>

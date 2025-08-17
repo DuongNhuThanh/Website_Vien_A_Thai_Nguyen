@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,6 +39,9 @@
                         <i class="ti-archive"></i>
                         <input style="border: none; font-weight: 550; " type="submit" name="dichvu" id="" value="Dịch vụ">
                     </li>
+                    <li>
+                        <input style="border: none; font-weight: 550; " type="submit" name="logout" id="" value="Thoát">
+                    </li>
                     </form>
                 </div>
             </div>
@@ -48,41 +50,51 @@
 </body>
 
 </html>
+
 <?php
-require_once '/xampp/htdocs/Vien_A/admin/controler/BacsiController.php';
-require_once '/xampp/htdocs/Vien_A/admin/controler/ChuyenkhoaController.php';
-require_once '/xampp/htdocs/Vien_A/admin/controler/PhieukhamController.php';
-require_once '/xampp/htdocs/Vien_A/admin/controler/LichtrinhController.php';
-require_once '/xampp/htdocs/Vien_A/admin/controler/DichvuController.php';
+session_start();
+ob_start();
+if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
+    require_once '/xampp/htdocs/Vien_A/admin/controler/BacsiController.php';
+    require_once '/xampp/htdocs/Vien_A/admin/controler/ChuyenkhoaController.php';
+    require_once '/xampp/htdocs/Vien_A/admin/controler/PhieukhamController.php';
+    require_once '/xampp/htdocs/Vien_A/admin/controler/LichtrinhController.php';
+    require_once '/xampp/htdocs/Vien_A/admin/controler/DichvuController.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $action = key($_GET); // Lấy key đầu tiên từ tham số GET
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        $action = !empty($_GET) ? key($_GET) : 'phieukham';
 
-    switch ($action) {
-        case 'bacsi':
-            $bacsi = new BacsiController();
-            $bacsi->DSBS();
-            break;
-        case 'lichtrinh':
-            $lichtrinh = new LichtrinhController();
-            $lichtrinh->DSLT();
-            break;
-        case 'chuyenkhoa':
-            $chuyenkhoa = new ChuyenkhoaController();
-            $chuyenkhoa->DSCK();
-            break;
-
-        case 'dichvu':
-            $dichvu = new DichvuController();
-            $dichvu->DSDV();
-            break; 
-
-        default:
-            // Xử lý trường hợp không hợp lệ
-            $phieukham = new PhieukhamController();
-            $phieukham->DSPK();
-            break;
+        switch ($action) {
+            case 'bacsi':
+                $bacsi = new BacsiController();
+                $bacsi->DSBS();
+                break;
+            case 'lichtrinh':
+                $lichtrinh = new LichtrinhController();
+                $lichtrinh->DSLT();
+                break;
+            case 'chuyenkhoa':
+                $chuyenkhoa = new ChuyenkhoaController();
+                $chuyenkhoa->DSCK();
+                break;
+            case 'dichvu':
+                $dichvu = new DichvuController();
+                $dichvu->DSDV();
+                break;
+            case 'logout':
+                if(isset($_SESSION['role'])){
+                    unset($_SESSION['role']);
+                    header('Location: ../login.php');
+                }
+            default:
+                $phieukham = new PhieukhamController();
+                $phieukham->DSPK();
+                break;
+        }
     }
+} else {
+    header('Location:login.php');
+    exit();
 }
-
 ?>
+

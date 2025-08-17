@@ -22,6 +22,11 @@ class Dichvu
         $kq = mysqli_query($this->conn, $query);
         return $kq;
     }
+    public function layDVTheoMaCK($machuyenkhoa){
+        $query = "SELECT tendichvu FROM dichvu WHERE machuyenkhoa = '$machuyenkhoa'";
+        $kq = mysqli_query($this->conn, $query);
+        return $kq;
+    }
 
     public function themDV($madichvu,$tendichvu,$mota,$chiphi,$chuyenkhoa){
         $query = "INSERT INTO dichvu VALUES ('$madichvu', '$tendichvu', '$mota', '$chiphi', '$chuyenkhoa')";
