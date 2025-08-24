@@ -34,9 +34,9 @@ if ($kqDV) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Đặt lịch khám bệnh viện A Thái Nguyên</title>
-    <link rel="stylesheet" href="./asset/main.css">
+    <link rel="stylesheet" href="./asset/main_a.css">
     <link rel="stylesheet" href="./asset/icon/themify-icons-font/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="./asset/javascript/main.js">
+    <link rel="stylesheet" href="./asset/javascript/main-js.js">
 </head>
 
 <body>
@@ -47,14 +47,6 @@ if ($kqDV) {
                     <i class="ti-headphone-alt"></i>
                     <b> HOTLINE: </b>
                     <b id="number">0208.3846112</b>
-                </div>
-                <div>
-                    <form action="" class="search" method="post">
-                        <div class="search-nav">
-                            <input type="text" placeholder="   Tìm kiếm">
-                            <i class="ti-search"></i>
-                        </div>
-                    </form>
                 </div>
 
                 <div class="chirld">
@@ -100,7 +92,6 @@ if ($kqDV) {
                             </li>
                         </ul>
                     </li>
-
                 </div>
             </div>
         </div>
@@ -116,13 +107,17 @@ if ($kqDV) {
 
         <div class="doctor-container">
             <div class="container-doc">
-                <?php foreach ($rowBS as $bs) { ?>
-                    <?php if ($bs['machuyenkhoa']) { //lấy mã chuyên khoa của từng đối tượng bác sĩ để lấy ra chuyên khoa tương ứng
+                <?php
+                $i = 0;
+                foreach ($rowBS as $bs) {
+                    if ($i >= 6) break; // Dừng vòng lặp sau khi đã hiển thị 6 bác sĩ
+
+                    if ($bs['machuyenkhoa']) {
                         $maCKBS = $bs['machuyenkhoa'];
                         $kqCKBS = $chuyenkhoa->TenCK($maCKBS);
                         $TenCKBS = mysqli_fetch_assoc($kqCKBS);
-                    } ?>
-
+                    }
+                ?>
                     <div class="box-doctor"
                         data-bacsi="<?php echo htmlspecialchars($bs['tenbacsi']); ?>"
                         data-mack="<?php echo htmlspecialchars($bs['machuyenkhoa']); ?>">
@@ -151,7 +146,10 @@ if ($kqDV) {
                             <div class="ti-arrow-right"></div>
                         </div>
                     </div>
-                <?php } ?>
+                <?php
+                    $i++; // Tăng biến đếm sau mỗi lần hiển thị
+                }
+                ?>
             </div>
 
             <div><a href="./customer/view/bacsi.php">Xem thêm</a></div>
@@ -248,8 +246,10 @@ if ($kqDV) {
                     <div class="popup">
                         <h3>Xác nhận thông tin đặt lịch</h3>
                         <div id="infoPreview"></div>
-                        <button onclick="submitForm()">Xác nhận gửi</button>
-                        <button onclick="closeConfirm()">Hủy</button>
+                        <div class="btn-click">
+                            <button class="submit" onclick="submitForm()">Xác nhận gửi</button>
+                            <button class="close" onclick="closeConfirm()">Hủy</button>
+                        </div>
                     </div>
                 </div>
                 <script>
@@ -279,15 +279,15 @@ if ($kqDV) {
                         }
 
                         const preview = `
-            <p><strong>Họ tên:</strong> ${data.hoten}</p>
-            <p><strong>Email:</strong> ${data.email}</p>
-            <p><strong>SĐT:</strong> ${data.sdt}</p>
-            <p><strong>Khung giờ:</strong> ${data.khunggio}</p>
-            <p><strong>Chuyên khoa:</strong> ${data.chuyenkhoa}</p>
-            <p><strong>Bác sĩ:</strong> ${data.bacsi}</p>
-            <p><strong>Dịch vụ:</strong> ${data.dichvu}</p>
-            <p><strong>Triệu chứng:</strong> ${data.mota}</p>
-        `;
+                        <p><strong>Họ tên:</strong> ${data.hoten}</p>
+                        <p><strong>Email:</strong> ${data.email}</p>
+                        <p><strong>SĐT:</strong> ${data.sdt}</p>
+                        <p><strong>Khung giờ:</strong> ${data.khunggio}</p>
+                        <p><strong>Chuyên khoa:</strong> ${data.chuyenkhoa}</p>
+                        <p><strong>Bác sĩ:</strong> ${data.bacsi}</p>
+                        <p><strong>Dịch vụ:</strong> ${data.dichvu}</p>
+                        <p><strong>Triệu chứng:</strong> ${data.mota}</p>
+                        `;
                         document.getElementById('infoPreview').innerHTML = preview;
                         document.getElementById('confirmBox').style.display = 'flex';
                     }
@@ -310,15 +310,15 @@ if ($kqDV) {
                         };
 
                         const display = `
-            <p><strong>Họ tên:</strong> ${data.hoten}</p>
-            <p><strong>Email:</strong> ${data.email}</p>
-            <p><strong>SĐT:</strong> ${data.sdt}</p>
-            <p><strong>Khung giờ:</strong> ${data.khunggio}</p>
-            <p><strong>Chuyên khoa:</strong> ${data.chuyenkhoa}</p>
-            <p><strong>Bác sĩ:</strong> ${data.bacsi}</p>
-            <p><strong>Dịch vụ:</strong> ${data.dichvu}</p>
-            <p><strong>Triệu chứng:</strong> ${data.mota}</p>
-        `;
+                        <p><strong>Họ tên:</strong> ${data.hoten}</p>
+                        <p><strong>Email:</strong> ${data.email}</p>
+                        <p><strong>SĐT:</strong> ${data.sdt}</p>
+                        <p><strong>Khung giờ:</strong> ${data.khunggio}</p>
+                        <p><strong>Chuyên khoa:</strong> ${data.chuyenkhoa}</p>
+                        <p><strong>Bác sĩ:</strong> ${data.bacsi}</p>
+                        <p><strong>Dịch vụ:</strong> ${data.dichvu}</p>
+                        <p><strong>Triệu chứng:</strong> ${data.mota}</p>
+                        `;
                         document.getElementById('displayContent').innerHTML = display;
                         document.getElementById('confirmBox').style.display = 'none';
                         form.submit();
@@ -426,7 +426,7 @@ if ($kqDV) {
             </div>
         </div>
     </div>
-    <script src="./asset/javascript/main.js"></script>
+    <script src="./asset/javascript/main_js.js"></script>
 
 
 </body>

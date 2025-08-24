@@ -18,8 +18,8 @@ class PhieukhamController
         require_once "/xampp/htdocs/Vien_A/admin/view/phieukham/index.php";
     }
 
-    public function themPK($maphieu,$thoigian,$hoten,$email,$sdt,$chuyenkhoa,$bacsi,$dichvu,$mota){
-        $kq = $this->phieukham->themPK($maphieu,$thoigian,$hoten,$email,$sdt,$chuyenkhoa,$bacsi,$dichvu,$mota);
+    public function themPK($thoigian,$hoten,$email,$sdt,$chuyenkhoa,$bacsi,$dichvu,$mota){
+        $kq = $this->phieukham->themPK($thoigian,$hoten,$email,$sdt,$chuyenkhoa,$bacsi,$dichvu,$mota);
         echo "<script>
         alert('Cảm ơn bạn đã gửi thông tin!');
         window.location.href = '/Vien_A/index.php'; 

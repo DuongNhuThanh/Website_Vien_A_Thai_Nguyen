@@ -25,6 +25,10 @@ class BacsiController
         $kq = $this->bacsi->layBSTheoMaCK($machuyenkhoa);
         return $kq;
     }
+    public function DSBSCK($machuyenkhoa){
+        $kq = $this->bacsi->layBSCK($machuyenkhoa);
+        return $kq;
+    }
 
     
 }

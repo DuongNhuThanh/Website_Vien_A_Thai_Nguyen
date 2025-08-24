@@ -32,9 +32,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
-.cursor {
-    
-}
+
 .header-top {
     display: flex;
     justify-content: space-between;
@@ -64,25 +62,6 @@ body {
     cursor: pointer;
 }
 
-.header-top .search-nav {
-    display: flex;
-    margin-top: 8px;
-}
-
-.header-top .search input {
-    padding: 0px 6px;
-    line-height: 30px;
-    min-width: 400px;
-    border: 2px solid #999797;
-    border-radius: 30px;
-    font-size: 16px;
-}
-
-.header-top .search .search-nav .ti-search {
-    margin-left: -33px;
-    padding-top: 8px;
-}
-
 #text-head {
     color: rgb(244, 14, 14);
     cursor: pointer;
@@ -109,7 +88,7 @@ body {
 }
 
 .nav {
-    border: 1px solid #ccc;
+    border: 1px solid #e0dede;
     background-color: #f1ecec;
     border-radius: 5px;
     margin: 0 20px;
@@ -139,7 +118,7 @@ body {
     display: none;
     position: absolute;
     text-align: left;
-    border: 1px solid #ccc;
+    border-radius: 12px;
     margin-top: 16px;
     background-color: rgb(255, 255, 255);
     z-index: 1;
@@ -147,6 +126,8 @@ body {
 
 .nav .subnav li {
     display: block;
+    border-top:#ccc;
+    border-radius: 12px;
 }
 
 .nav .subnav li:hover {
@@ -346,25 +327,55 @@ h2 {
 
 .popup {
     background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 500px;
+    padding: 55px;
+    border-radius: 56px;
+    max-width: 600px;
     width: 90%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
 }
 
 .popup h3 {
+    padding: 12px;
+    font-size: 36px;
     margin-top: 0;
-    color: #2c3e50;
+    color: #4488df;
+    text-align: center;
 }
 
 .popup p {
-    margin: 10px 0;
+    padding: 16px;
+    border-radius: 16px;
+    background-color: #f1ebeb;
+    margin: 12px 0;
 }
 
-.popup button {
-    margin: 10px 5px;
+.popup .btn-click {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn-click .submit {
+    border: none;
+    border-radius: 20px;
+    background-color: #a4e488;
+    padding: 12px;
+}
+
+.btn-click .close {
+    margin-left: 16px;
+    border-radius: 20px;
+    background-color: #f17461;
+    padding: 12px;
+}
+
+.btn-click .submit:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.btn-click .close:hover {
+    cursor: pointer;
+    opacity: 0.6;
 }
 
 .popup button:nth-child(2) {

@@ -1,6 +1,6 @@
 <?php
-require_once '\xampp\htdocs\Vien_A\admin\controler\BacsiController.php';
-require_once '\xampp\htdocs\Vien_A\admin\controler\DichvuController.php';
+require_once '/xampp/htdocs/Vien_A/admin/controler/BacsiController.php';
+require_once '/xampp/htdocs/Vien_A/admin/controler/DichvuController.php';
 
 $machuyenkhoa = $_POST['machuyenkhoa'];
 
@@ -16,7 +16,7 @@ $dsDV = [];
 if ($kqBS) {//đọc toàn bộ kq gán vào mảng ở cột tenbacsi
   while ($bs = mysqli_fetch_assoc($kqBS)) {
     $dsBS[] = [
-      "tenbacsi" => $bs['tenbacsi']
+      "tenbacsi" => $bs['tenbacsi'],
     ];
   }
 }

@@ -28,8 +28,8 @@ class Phieukham
         $kq = mysqli_query($this->conn,$query);
         return $kq;
     }
-    public function themPK($maphieu,$thoigian,$hoten,$email,$sdt,$chuyenkhoa,$bacsi,$dichvu,$mota){
-        $query = "INSERT INTO phieukham VALUES ('$maphieu','$thoigian','$hoten','$email','$sdt','$chuyenkhoa','$bacsi','$dichvu','$mota')";
+    public function themPK($thoigian,$hoten,$email,$sdt,$chuyenkhoa,$bacsi,$dichvu,$mota){
+        $query = "INSERT INTO phieukham VALUES ('$thoigian','$hoten','$email','$sdt','$chuyenkhoa','$bacsi','$dichvu','$mota')";
         $kq = mysqli_query($this->conn,$query);
         return $kq;
     }

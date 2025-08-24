@@ -22,6 +22,11 @@ class Bacsi
         $kq = mysqli_query($this->conn, $query);
         return $kq;
     }
+    public function layBSCK($machuyenkhoa){
+        $query = "SELECT * FROM bacsi WHERE machuyenkhoa = '$machuyenkhoa' ";
+        $kq = mysqli_query($this->conn, $query);
+        return $kq;
+    }
     
 
 

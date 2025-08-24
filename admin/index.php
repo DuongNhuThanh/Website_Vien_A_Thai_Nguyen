@@ -28,7 +28,7 @@
                     </li>
                     <li>
                         <i class="ti-receipt"></i>
-                        <input style="border: none; font-weight: 550; " type="submit" name="lichtrinh" id="" value="Lịch trình Bác sĩ">
+                        <input style="border: none; font-weight: 550; " type="button" name="lichtrinh" id="" value="Lịch trình Bác sĩ">
 
                     </li>
                     <li>
@@ -84,7 +84,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
             case 'logout':
                 if(isset($_SESSION['role'])){
                     unset($_SESSION['role']);
-                    header('Location: ../login.php');
+                    header('Location: ../index.php');
                 }
             default:
                 $phieukham = new PhieukhamController();

@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.container .title {
+    text-align: center;
+}
+
+.container .title h5 {
+    padding: 12px 0;
+    opacity: 0.7;
+}
+
+.container .button-select-ck {
+    margin-top: 22px;
+    display: flex;
+    /* justify-content: center; */
+    margin-left: 50px;
+}
+
+.container .button-select-ck button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.container .button-select-ck button:hover {
+    background-color: #f5f5f5;
+    border-color: #c8c8c8;
+}
+#button-select-ck {
+    padding: 10px;
+    border: none;
+    border-radius: 16px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+#button-select-ck:hover {
+    opacity: 0.6;
+
+}
+/* Popup */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    max-height: 80vh;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    width: 100%;
+    max-height: 73vh;
+}
+
+.popup-content h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+#search-ck {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+}
+
+/* Danh sách chuyên khoa */
+.ck-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.khoa_item {
+    width: 120px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #f9f9f9;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.khoa_item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.khoa_item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 6px;
+}
+
+.khoa_item p {
+    font-size: 14px;
+    margin: 0;
+    color: #333;
+}
+
+/* Ẩn popup */
+.hidden {
+    display: none; 
+}
+
+.container .grid_container_doc {
+    margin-top: 50px;
+    padding: 0 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+.box-doctor {
+    padding: 16px;
+    max-width: 375px;
+    text-align: center;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.box-doctor .img-doc img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+}
+
+.box-doctor .name-doc {
+    font-weight: 550;
+    padding: 12px 0;
+    font-size: 16px;
+}
+
+.box-doctor .name-doc:hover {
+    color: #2196F3;
+    cursor: pointer;
+}
+
+.box-doctor .chyenkhoa-doc {
+    font-weight: 550;
+    opacity: 0.5;
+    font-size: 16px;
+}
+
+.box-doctor .chucvi-doc {
+    font-weight: 550;
+    padding-bottom: 12px;
+    font-size: 18px;
+}
+
+.box-doctor a {
+    color: #2196F3;
+    text-decoration: none;
+}

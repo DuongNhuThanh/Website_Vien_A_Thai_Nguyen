@@ -7,6 +7,14 @@
             $rowCK[] = $ck;
     }
 }
+require_once '\xampp\htdocs\Vien_A\admin\controler\ChuyenkhoaController.php';
+$chuyenkhoa = new ChuyenkhoaController();
+$kqCK = $chuyenkhoa->DSCKUSER();
+if ($kqCK) {
+    while ($ck = mysqli_fetch_assoc($kqCK)) {
+        $rowCK[] = $ck;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,14 +35,6 @@
                 <i class="ti-headphone-alt"></i>
                 <b> HOTLINE: </b>
                 <b id="number">0208.3846112</b>
-            </div>
-            <div>
-                <form action="" class="search" method="post">
-                    <div class="search-nav">
-                        <input type="text" placeholder="   Tìm kiếm">
-                        <i class="ti-search"></i>
-                    </div>
-                </form>
             </div>
 
             <div class="chirld">
@@ -58,7 +58,7 @@
                 </li>
                 <li>
                     <i class="ti-bookmark-alt"></i>
-                    <a href="#">Chuyên khoa </a>
+                    <a href="#">Chuyên khoa</a>
                 </li>
                 <li>
                     <i class="ti-archive"></i>
